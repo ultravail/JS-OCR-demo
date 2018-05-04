@@ -35,6 +35,22 @@
     function searchForRearCamera() {
         var deferred = new $.Deferred();
 
+        /*
+        if (navigator.mediaDevices && navigator.mediaDevices.enumerateDevices) {
+            // List cameras and microphones.
+            navigator.mediaDevices.enumerateDevices()
+            .then(function(devices) {
+              devices.forEach(function(device) {
+                console.log(device.kind + ": " + device.label +
+                            " id = " + device.deviceId);
+              });
+            })
+            .catch(function(err) {
+              console.log(err.name + ": " + err.message);
+            });
+        }
+        */
+        
         //MediaStreamTrack.getSources seams to be supported only by Chrome
         if (MediaStreamTrack && MediaStreamTrack.getSources) {
             MediaStreamTrack.getSources(function (sources) {
