@@ -211,12 +211,14 @@
             cropData.h * scale);
 
         //use ocrad.js to extract text from the canvas
-        var resultText = OCRAD(ctx);
-        resultText = resultText.trim();
-
-        //show the result
-        $('blockquote p').html('&bdquo;' + resultText + '&ldquo;');
-        $('blockquote footer').text('(' + resultText.length + ' characters)')
+        OCRAD(ctx, {
+					numeric: true
+				}, function(resultText){
+                    resultText = resultText.trim();
+                    //show the result
+                    $('blockquote p').html('&bdquo;' + resultText + '&ldquo;');
+                    $('blockquote footer').text('(' + resultText.length + ' characters)');
+				});
     }
 
     /*********************************
