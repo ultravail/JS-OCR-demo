@@ -259,14 +259,16 @@
     }
 
     //handle brightness/contrast change
-    $('#brightness, #contrast').on('change', function () {
+    $('#brightness, #contrast, #radius, #strength').on('change', function () {
         var brightness = $('#brightness').val() / 100;
         var contrast = $('#contrast').val() / 100;
+        var radius = $('#radius').val();
+        var strength = $('#strength').val();
         var img = document.querySelector('#step2 img');
 
         fxCanvas.draw(texture)
             .hueSaturation(-1, -1)
-            .unsharpMask(20, 2)
+            .unsharpMask(radius, strength)
             .brightnessContrast(brightness, contrast)
             .update();
 
