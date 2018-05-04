@@ -215,7 +215,7 @@
 		.progress(message => console.log(message))
 		.then(function(res) {
 			res.words.forEach(function(w){
-				resultText = w.text.trim();
+				resultText = w.text.trim() + " (" + Math.round(w.confidence * 100) / 100 + "%)";
 				//show the result
 				$('blockquote p').html('&bdquo;' + resultText + '&ldquo;');
 				$('blockquote footer').text('(' + resultText.length + ' characters)');
