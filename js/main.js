@@ -209,16 +209,29 @@
             0,
             cropData.w * scale,
             cropData.h * scale);
-
+	    
+        //use tesseract.js to extract text from the canvas
+	Tesseract.recognize(canvas, {classify_bln_numeric_mode: true})
+		.progress(message => console.log(message))
+		.then(function(res) {
+			res.words.forEach(function(w){
+				resultText = w.text.trim();
+				//show the result
+				$('blockquote p').html('&bdquo;' + resultText + '&ldquo;');
+				$('blockquote footer').text('(' + resultText.length + ' characters)');
+			});
+		});
         //use ocrad.js to extract text from the canvas
+	    /*
         OCRAD(ctx, {
-					numeric: true
-				}, function(resultText){
-                    resultText = resultText.trim();
-                    //show the result
-                    $('blockquote p').html('&bdquo;' + resultText + '&ldquo;');
-                    $('blockquote footer').text('(' + resultText.length + ' characters)');
-				});
+		numeric: true
+	}, function(resultText){
+		resultText = resultText.trim();
+		//show the result
+		$('blockquote p').html('&bdquo;' + resultText + '&ldquo;');
+		$('blockquote footer').text('(' + resultText.length + ' characters)');
+	});
+	*/
     }
 
     /*********************************
